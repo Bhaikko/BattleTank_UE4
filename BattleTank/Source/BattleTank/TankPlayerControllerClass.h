@@ -17,10 +17,13 @@ class BATTLETANK_API ATankPlayerControllerClass : public APlayerController
 
 public:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
 
 	ATank* getPlayerControlledTank() const; //Created An Object Of Class Tank
 	
+	void AimTowardsCrosshair();
 	
+	bool GetSightRayHitLocation(FVector&) const;
 	
 
 	
