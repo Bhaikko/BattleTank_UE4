@@ -22,5 +22,6 @@ public:
 
 	ATank* GetPlayerTank() const;
 
+	void Tick(float) override;
 	
 };
