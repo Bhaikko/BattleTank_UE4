@@ -17,7 +17,7 @@ void ATankAIController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	ControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
-	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"), *ControlledTank()->GetName(), *GetPlayerTank()->GetName());
+	//UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s"), *ControlledTank()->GetName(), *GetPlayerTank()->GetName());
 	
 
 }
