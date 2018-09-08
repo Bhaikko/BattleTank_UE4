@@ -41,3 +41,13 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	TankAimingComponent->SetBarrelComponent(BarrelToSet);
 }
+
+void ATank::SetTurrentReference(UTankTurren * TurrenToSet)
+{
+	TankAimingComponent->SetTurrentComponent(TurrenToSet);
+}
+
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Fired!!"));
+}

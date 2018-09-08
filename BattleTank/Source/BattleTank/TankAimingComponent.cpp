@@ -18,7 +18,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::AimAt(FVector Location,float launchSpeed)
 {
-	if (!Barrel)
+	if (!Barrel||!Turrent)
 		return;
 
 	FVector OutLaunchVelocity;
@@ -39,6 +39,10 @@ void UTankAimingComponent::SetBarrelComponent(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
+void UTankAimingComponent::SetTurrentComponent(UTankTurren* TurrentToSet)
+{
+	Turrent = TurrentToSet;
+}
 
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
@@ -48,5 +52,6 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 	FRotator DeltaRotation = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotation.Pitch);
+	Turrent->Rotate(DeltaRotation.Yaw);
 
 }

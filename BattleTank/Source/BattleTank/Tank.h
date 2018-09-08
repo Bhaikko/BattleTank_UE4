@@ -8,6 +8,7 @@
 #include "Tank.generated.h"
 
 class UTankBarrel;
+class UTankTurre;
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -20,6 +21,10 @@ public:
 	void AimAt(FVector);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetBarrelReference(UTankBarrel* BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTurrentReference(UTankTurren* TurrenToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void Fire();
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 100000;   //In m/s

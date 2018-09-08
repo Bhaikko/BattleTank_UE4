@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TankBarrel.h"
+#include "TankTurren.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
@@ -23,10 +24,12 @@ public:
 	UTankAimingComponent();
 	void AimAt(FVector,float);
 	void SetBarrelComponent(UTankBarrel*);
+	void SetTurrentComponent(UTankTurren*);
 	void MoveBarrel(FVector);
 	
 private:
 	UTankBarrel* Barrel = NULL;
+	UTankTurren* Turrent = NULL;
 		
 	
 };
