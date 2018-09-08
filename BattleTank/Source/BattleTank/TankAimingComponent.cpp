@@ -16,50 +16,37 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-
 void UTankAimingComponent::AimAt(FVector Location,float launchSpeed)
 {
 	if (!Barrel)
 		return;
+
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	
-	if (UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, Location, launchSpeed,false,0,0,ESuggestProjVelocityTraceOption::DoNotTrace))
+	float Time = GetWorld()->GetTimeSeconds();
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, Location, launchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace);
+	if (bHaveAimSolution)
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrel(AimDirection);
-	
-
+		//UE_LOG(LogTemp, Warning, TEXT("%f :Solution Found For %s"), Time,*GetOwner()->GetName());
 	}
+	
+		//UE_LOG(LogTemp, Warning, TEXT("%f :Solution Not Found For %s"), Time, *GetOwner()->GetName());
 }
 
-void UTankAimingComponent::SetBarrelComponent(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelComponent(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
 
 void UTankAimingComponent::MoveBarrel(FVector AimDirection)
 {
+
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotation = AimAsRotator - BarrelRotator;
 
-	UE_LOG(LogTemp,Warning , TEXT("AimAsRotator %s"),*DeltaRotation.ToString())
+	Barrel->Elevate(DeltaRotation.Pitch);
+
 }

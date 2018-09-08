@@ -66,7 +66,9 @@ bool ATankPlayerControllerClass::GetLookVectorHitLocation(FVector LookDirection,
 	//UE_LOG(LogTemp, Error, TEXT("Inside Tick"))
 
 	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor(255, 0, 0), false);
-	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility))
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(GetOwner());
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility,Params))
 	{
 		HitLocation = HitResult.Location;
 		return true;
