@@ -5,10 +5,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "TankAimingComponent.h"
+#include "Projectile.h"
 #include "Tank.generated.h"
 
 class UTankBarrel;
 class UTankTurre;
+
+
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -29,11 +32,19 @@ public:
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 100000;   //In m/s
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+
+
+	float ReloadTime = 3;
+	double LastTimeFired = 0;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankAimingComponent* TankAimingComponent=NULL;
+	UTankAimingComponent* TankAimingComponent = NULL;
+	UTankBarrel* Barrel = NULL; //For Reference
 
 public:	
 	// Called every frame
@@ -41,6 +52,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	
 
 	
 	
