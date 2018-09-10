@@ -9,10 +9,17 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
+
+public:
+	UFUNCTION(BlueprintCallable, Category = Input)
+		void Throttle(float Throttle);
+
+	UPROPERTY(EditDefaultsOnly)
+		float TrackMaxDrivingForce = 40000;// Assume 40 Tonne Tank and 1g acceleration
 	
 	
 	
