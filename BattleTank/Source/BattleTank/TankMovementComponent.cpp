@@ -2,6 +2,7 @@
 
 #include "TankMovementComponent.h"
 
+
 void UTankMovementComponent::TrackReferences(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
 	LeftTrack = LeftTrackToSet;
@@ -23,3 +24,10 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	FString Velocity = MoveVelocity.ToString();
+	FString TankName = GetOwner()->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s Vectoring At %s"), *TankName,*Velocity);
+	
+}

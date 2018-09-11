@@ -19,4 +19,7 @@ public:
 	void BeginPlay() override;
 	void Tick(float) override;
 	
+private:
+	UPROPERTY(EditDefaultsOnly)
+		float AcceptanceRadius = 30;
 };
