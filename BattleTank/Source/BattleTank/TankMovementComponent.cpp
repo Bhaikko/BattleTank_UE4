@@ -2,9 +2,24 @@
 
 #include "TankMovementComponent.h"
 
-void UTankMovementComponent::IntendMoveForward(float Throw)
+void UTankMovementComponent::TrackReferences(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Tank Throwing At %f"), Throw);
+	LeftTrack = LeftTrackToSet;
+	RightTrack = RightTrackToSet;
 }
 
+
+void UTankMovementComponent::IntendMoveForward(float Throw)
+{
+	LeftTrack->Throttle(Throw);
+	RightTrack->Throttle(Throw);
+
+}
+
+void UTankMovementComponent::IntendTurnRight(float Throw)
+{
+	LeftTrack->Throttle(Throw);
+	RightTrack->Throttle(-Throw);
+
+}
 
