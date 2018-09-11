@@ -4,13 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "TankAimingComponent.h"
-#include "Projectile.h"
 #include "Tank.generated.h"
 
 class UTankBarrel;
 class UTankTurre;
-
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -45,6 +43,8 @@ protected:
 
 	UTankAimingComponent* TankAimingComponent = NULL;
 	UTankBarrel* Barrel = NULL; //For Reference
+	UPROPERTY(BlueprintReadOnly)
+		UTankMovementComponent* TankMovementComponent = nullptr;
 
 public:	
 	// Called every frame
