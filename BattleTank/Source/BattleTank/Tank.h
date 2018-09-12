@@ -9,6 +9,9 @@
 #include "Projectile.h"
 #include "Tank.generated.h"
 
+
+
+
 class UTankBarrel;
 class UTankTurre;
 class UTankMovementComponent;
@@ -43,8 +46,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UTankAimingComponent* TankAimingComponent = NULL;
+	UPROPERTY(BlueprintReadOnly)
+		UTankAimingComponent* TankAimingComponent = NULL;
 	UTankBarrel* Barrel = NULL; //For Reference
 	UPROPERTY(BlueprintReadOnly)
 		UTankMovementComponent* TankMovementComponent = nullptr;
@@ -56,8 +59,4 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
-
-	
-	
 };

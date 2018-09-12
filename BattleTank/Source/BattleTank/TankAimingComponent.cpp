@@ -29,10 +29,7 @@ void UTankAimingComponent::AimAt(FVector Location,float launchSpeed)
 	{
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrel(AimDirection);
-		//UE_LOG(LogTemp, Warning, TEXT("%f :Solution Found For %s"), Time,*GetOwner()->GetName());
 	}
-	
-		//UE_LOG(LogTemp, Warning, TEXT("%f :Solution Not Found For %s"), Time, *GetOwner()->GetName());
 }
 
 void UTankAimingComponent::SetBarrelComponent(UTankBarrel* BarrelToSet)
