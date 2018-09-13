@@ -5,11 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "Projectile.h"
 #include "Tank.generated.h"
-
-
 
 
 class UTankBarrel;
@@ -27,10 +24,6 @@ public:
 
 	void AimAt(FVector);
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel* BarrelToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurrentReference(UTankTurren* TurrenToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
 		void Fire();
 
 	UPROPERTY(EditAnywhere, Category = Firing)
@@ -47,10 +40,11 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	UPROPERTY(BlueprintReadOnly)
-		UTankAimingComponent* TankAimingComponent = NULL;
-	UTankBarrel* Barrel = NULL; //For Reference
+		UTankAimingComponent* TankAimingComponent = nullptr;
+	
 	UPROPERTY(BlueprintReadOnly)
 		UTankMovementComponent* TankMovementComponent = nullptr;
+
 
 public:	
 	// Called every frame

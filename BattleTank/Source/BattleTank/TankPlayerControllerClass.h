@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Tank.h"
 #include "Engine/World.h"
-#include "DrawDebugHelpers.h"
+#include "TankAimingComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerControllerClass.generated.h"
 
@@ -38,6 +38,12 @@ private:
 protected:
 	UFUNCTION(BlueprintCallable,Category="Setup")
 		ATank* getPlayerControlledTank() const; //Created An Object Of Class Tank
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+		void FoundAimingComponent(UTankAimingComponent* AimCompRef);  //Defination In TankPlayerBlueprint
+
+	
+
 	
 	
 };

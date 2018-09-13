@@ -16,6 +16,7 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
+
 void UTankAimingComponent::AimAt(FVector Location,float launchSpeed)
 {
 	if (!Barrel||!Turrent)
@@ -31,13 +32,9 @@ void UTankAimingComponent::AimAt(FVector Location,float launchSpeed)
 		MoveBarrel(AimDirection);
 	}
 }
-
-void UTankAimingComponent::SetBarrelComponent(UTankBarrel* BarrelToSet)
+void UTankAimingComponent::Initialse(UTankBarrel* BarrelToSet, UTankTurren* TurrentToSet)
 {
 	Barrel = BarrelToSet;
-}
-void UTankAimingComponent::SetTurrentComponent(UTankTurren* TurrentToSet)
-{
 	Turrent = TurrentToSet;
 }
 

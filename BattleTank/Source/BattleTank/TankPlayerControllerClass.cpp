@@ -6,7 +6,9 @@ void ATankPlayerControllerClass::BeginPlay()
 {
 
 	Super::BeginPlay();
-
+	UTankAimingComponent* AimingComponent = getPlayerControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent)
+		FoundAimingComponent(AimingComponent);
 }
 
 void ATankPlayerControllerClass::Tick(float DeltaTime)
