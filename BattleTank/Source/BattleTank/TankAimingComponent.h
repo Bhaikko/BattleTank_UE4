@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "TankBarrel.h"
 #include "TankTurren.h"
+#include "Projectile.h"
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
@@ -37,14 +38,29 @@ public:
 	void MoveBarrel(FVector);
 	UTankBarrel* Barrel = NULL;
 	UTankTurren* Turrent = NULL;
+
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void Fire();
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 4000;   //In m/s
 
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBlueprint;
+
+
+
+	float ReloadTime = 3;
+	double LastTimeFired = 0;
+
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 		EFiringState FiringState = EFiringState::Aiming;
+
+	
 
 
 	

@@ -13,9 +13,7 @@ ATank::ATank()
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
-	Super::BeginPlay();
-	Barrel = FindComponentByClass<UTankBarrel>();
-	
+	Super::BeginPlay();	
 }
 
 // Called every frame
@@ -33,20 +31,4 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 
-void ATank::Fire()
-{
-	bool bIsReloaded = (GetWorld()->GetTimeSeconds() - LastTimeFired) > ReloadTime;
 
-	if (bIsReloaded)
-	{
-		FVector BarrelSocketLocation = Barrel->GetSocketLocation(FName("Projectile"));
-		FRotator BarrelSocketRotation = Barrel->GetSocketRotation(FName("Projectile"));
-		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, BarrelSocketLocation, BarrelSocketRotation);
-		Projectile->Launch(LaunchSpeed);
-
-		LastTimeFired = GetWorld()->GetTimeSeconds();
-	}
-	else
-		return;
-
-}

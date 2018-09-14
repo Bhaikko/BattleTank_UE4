@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "Projectile.h"
 #include "TankBarrel.h"
 #include "Engine/World.h"
 #include "Tank.generated.h"
@@ -23,20 +22,6 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void Fire();
-
-	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 4000;   //In m/s
-
-	UPROPERTY(EditAnywhere, Category = Setup)
-		TSubclassOf<AProjectile> ProjectileBlueprint;
-
-
-	float ReloadTime = 3;
-	double LastTimeFired = 0;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -44,7 +29,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 		UTankMovementComponent* TankMovementComponent = nullptr;
 
-	UTankBarrel* Barrel = nullptr;
 
 public:	
 	// Called every frame
