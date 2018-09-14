@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankAIController.generated.h"
 
 /**
@@ -22,4 +22,6 @@ public:
 private:
 	UPROPERTY(EditDefaultsOnly)
 		float AcceptanceRadius = 30;
+
+	UTankAimingComponent* AimingComponent = nullptr;
 };

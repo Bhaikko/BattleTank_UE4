@@ -14,7 +14,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
+	Barrel = FindComponentByClass<UTankBarrel>();
 	
 }
 
@@ -32,22 +32,15 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!TankAimingComponent)
-		return;
-	TankAimingComponent->AimAt(HitLocation,LaunchSpeed);
-}
-
 
 void ATank::Fire()
 {
 	bool bIsReloaded = (GetWorld()->GetTimeSeconds() - LastTimeFired) > ReloadTime;
 
-	if (bIsReloaded&&TankAimingComponent)
+	if (bIsReloaded)
 	{
-		FVector BarrelSocketLocation = TankAimingComponent->Barrel->GetSocketLocation(FName("Projectile"));
-		FRotator BarrelSocketRotation = TankAimingComponent->Barrel->GetSocketRotation(FName("Projectile"));
+		FVector BarrelSocketLocation = Barrel->GetSocketLocation(FName("Projectile"));
+		FRotator BarrelSocketRotation = Barrel->GetSocketRotation(FName("Projectile"));
 		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, BarrelSocketLocation, BarrelSocketRotation);
 		Projectile->Launch(LaunchSpeed);
 

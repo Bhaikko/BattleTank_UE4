@@ -35,9 +35,8 @@ private:
 	bool GetLookVectorHitLocation(FVector,FVector&) const; 
 	bool GetSightRayHitLocation(FVector&) const;
 	
+	UTankAimingComponent* AimingComponent = nullptr;
 protected:
-	UFUNCTION(BlueprintCallable,Category="Setup")
-		ATank* getPlayerControlledTank() const; //Created An Object Of Class Tank
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimCompRef);  //Defination In TankPlayerBlueprint
