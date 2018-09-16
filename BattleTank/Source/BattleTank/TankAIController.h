@@ -19,9 +19,11 @@ public:
 	void BeginPlay() override;
 	void Tick(float) override;
 	
+protected:
+	UPROPERTY(EditAnywhere, Category = "Setup")
+		float AcceptanceRadius = 8000;
 private:
-	UPROPERTY(EditDefaultsOnly)
-		float AcceptanceRadius = 30;
+	
 
 	UTankAimingComponent* AimingComponent = nullptr;
 };
