@@ -15,7 +15,7 @@ void ATankAIController::Tick(float DeltaTime)
 	AActor* AITank = GetPawn();
 	AActor* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	UE_LOG(LogTemp, Warning, TEXT("Radius %f"), AcceptanceRadius);
+	//UE_LOG(LogTemp, Warning, TEXT("Radius %f"), AcceptanceRadius);
 	MoveToActor(PlayerTank, AcceptanceRadius);
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
