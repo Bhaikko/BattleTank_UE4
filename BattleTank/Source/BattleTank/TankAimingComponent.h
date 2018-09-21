@@ -47,10 +47,10 @@ public:
 	EFiringState GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-		int GetAmmo() const;
+		int32 GetAmmo() const;
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 4000;   //In m/s
+		float LaunchSpeed = 40000;   //In m/s
 
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
@@ -59,13 +59,14 @@ private:
 	UPROPERTY(EditAnywhere, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
-	float ReloadTime = 3;
-	double LastTimeFired = 0;
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float ReloadTime = 3;
+	UPROPERTY(EditAnywhere, Category = Firing)
+		double LastTimeFired = 0;
+	UPROPERTY(EditAnywhere, Category = Firing)
+		int32 RoundsLeft = 3;
+
 	FVector AimDirection;
-
-	
-	int RoundsLeft = 3;
-
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
