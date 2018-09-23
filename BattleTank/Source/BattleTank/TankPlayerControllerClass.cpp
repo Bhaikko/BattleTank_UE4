@@ -69,6 +69,32 @@ bool ATankPlayerControllerClass::GetLookVectorHitLocation(FVector LookDirection,
 
 }
 
+void ATankPlayerControllerClass::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		ATank* PossessedTank = Cast<ATank>(InPawn);
+		if (!PossessedTank)
+			return;
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerControllerClass::OnPossessedTankDeath);
+	}
+	
+}
+
+void ATankPlayerControllerClass::OnPossessedTankDeath()
+{
+	if (!GetPawn())
+		return;
+	
+	StartSpectatingOnly();
+			
+
+	
+}
+
 
 
 
