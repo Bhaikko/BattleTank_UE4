@@ -84,6 +84,7 @@ void UTankAimingComponent::Fire()
 		Projectile->Launch(LaunchSpeed);	
 		LastTimeFired = GetWorld()->GetTimeSeconds();
 		RoundsLeft--;
+		//UE_LOG(LogTemp, Warning, TEXT("Inside"));
 	}
 	else
 		return;
