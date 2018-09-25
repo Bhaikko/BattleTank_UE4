@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "TankBarrel.h"
 #include "Engine/World.h"
+#include "SpringWheel.h"
 #include "Tank.generated.h"
 
 
 class UTankBarrel;
 class UTankTurre;
+class USpringWheel;
 class UTankMovementComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
@@ -49,5 +50,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser) override;
+
+private:
+
 
 };

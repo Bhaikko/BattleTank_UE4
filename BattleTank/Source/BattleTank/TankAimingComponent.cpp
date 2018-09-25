@@ -16,25 +16,21 @@ UTankAimingComponent::UTankAimingComponent()
 }
 void UTankAimingComponent::BeginPlay()
 {
+	Super::BeginPlay();
 	LastTimeFired = GetWorld()->GetTimeSeconds();
 }
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
 	if (RoundsLeft == 0)
 		FiringState = EFiringState::OutOfAmmo;
 	else if ((GetWorld()->GetTimeSeconds() - LastTimeFired) < ReloadTime)  //Reloaded
-	{
 		FiringState = EFiringState::Reloading;
-	}
 	else if (IsBarrelMoving())
-	{
 		FiringState = EFiringState::Aiming;
-	}
 	else
 		FiringState = EFiringState::Locked;
-
-	
-
 }
 
 void UTankAimingComponent::AimAt(FVector Location)
