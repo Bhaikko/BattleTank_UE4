@@ -50,3 +50,7 @@ void ASpringWheel::SetupConstraint()
 	AxelConstraint->SetConstrainedComponents(Axle, NAME_None, Wheel, NAME_None);
 }
 
+void ASpringWheel::AddDrivingForce(float ForceMagnitude)
+{
+	Wheel->AddForce(Axle->GetForwardVector()*ForceMagnitude);
+}

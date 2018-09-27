@@ -8,39 +8,27 @@ UTankTrack::UTankTrack()
 }
 void UTankTrack::BeginPlay()
 {
-	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+	Super::BeginPlay();
 }
-void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
-{
-	Drive();
-	SideFriction();
-	CurrentThrottle = 0;
-	
-	
-}
-void UTankTrack::SideFriction()
-{
-	UStaticMeshComponent* TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
-	float SlippageSpeed = FVector::DotProduct(GetRightVector(), GetComponentVelocity());
-	FVector CorrectionAcceleration = -SlippageSpeed / GetWorld()->TimeSeconds *GetRightVector();
-	FVector CorrectionForce = TankRoot->GetMass()*CorrectionAcceleration;
-	TankRoot->AddForce(CorrectionForce);
 
-}
 
 void UTankTrack::Throttle(float Throttle)
 {
 	
-	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1, 1);
+	float CurrentThrottle = FMath::Clamp<float>(Throttle, -1, 1);
+	Drive(CurrentThrottle);
 }
 
-void UTankTrack::Drive()
+void UTankTrack::Drive(float CurrentThrottle)
 {
 	
-	FVector ForceApplied = GetForwardVector()*CurrentThrottle*TrackMaxDrivingForce;
-	FVector ForceLocation = GetComponentLocation();
-	UPrimitiveComponent* TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+	float ForceApplied = CurrentThrottle*TrackMaxDrivingForce;
+	TArray<ASpringWheel*> Wheels = GetWheels();
+	float ForcePerWheel = ForceApplied / Wheels.Num();
+	for (ASpringWheel* Wheel : Wheels)
+	{
+		Wheel->AddDrivingForce(ForcePerWheel);
+	}
 
 }
 

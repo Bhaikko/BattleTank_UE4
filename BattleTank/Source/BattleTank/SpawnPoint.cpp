@@ -38,3 +38,5 @@ void USpawnPoint::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	// ...
 }
 
+
+

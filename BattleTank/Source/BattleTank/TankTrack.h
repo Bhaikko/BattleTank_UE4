@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
+#include "SpringWheel.h"
 #include "TankTrack.generated.h"
 
 /**
@@ -18,18 +19,14 @@ class BATTLETANK_API UTankTrack : public UStaticMeshComponent
 private:
 	UTankTrack();
 	virtual void BeginPlay() override;
-	void SideFriction();
 
-	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
-
-	float CurrentThrottle = 0;
+	TArray<ASpringWheel*> GetWheels() const;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void Throttle(float Throttle);
 
-	void Drive();
+	void Drive(float Throttle);
 
 	UPROPERTY(EditDefaultsOnly)
 		float TrackMaxDrivingForce = 40000;// Assume 40 Tonne Tank and 1g acceleration
